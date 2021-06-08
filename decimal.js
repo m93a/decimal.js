@@ -125,6 +125,72 @@
     P = { name: '[object Decimal]' };
 
 
+  // Arithmetics
+
+  const BigNumberArithmetics = {
+    [Symbol.for('arithmetics-additive-group')]: true,
+    [Symbol.for('arithmetics-ring')]: true,
+    [Symbol.for('arithmetics-division-ring')]: true,
+    [Symbol.for('arithmetics-vector-space')]: true,
+    [Symbol.for('arithmetics-normed-vector-space')]: true,
+    [Symbol.for('arithmetics-normed-division-ring')]: true,
+    [Symbol.for('arithmetics-real')]: true,
+
+    isCommutative: true,
+
+    one() { return BigNumber(1) },
+    zero() { return BigNumber(0) },
+    epsilon() { return BigNumber(0) },
+
+    toNumber(b) { return b.valueOf() },
+    fromNumber(x) {
+      if (digits(x) > 15) {
+        throw new TypeError('Cannot implicitly convert a number with >15 significant digits to BigNumber ' +
+          '(value: ' + x + '). ' +
+          'Use function bignumber(x) to convert to BigNumber.')
+      }
+      return new BigNumber(x)
+    },
+
+    fromReal(b) { return b.clone() },
+    conj(b) { return b.clone() },
+    real(b) { return b.clone() },
+    imag(b) { return BigNumber(0) },
+    normSq(b) { return b.mul(b) },
+    norm(b) { return b.abs() },
+    scale(b, d) { return b.mul(d) },
+
+    add(b, d) { return b.add(d) },
+    sub(b, d) { return b.sub(d) },
+    mul(b, d) { return b.mul(d) },
+    div(b, d) { return b.div(d) },
+    neg(b) { return b.neg() },
+    inv(b) { return BigNumber(1).div(b) },
+
+    pow(b, d) { return b.pow(d) },
+    exp(b) { return b.exp() },
+    expm1(f) { return b.exp().sub(1) },
+    log(f) { return f.ln() },
+    log1p(f) { return f.add(1).ln() },
+
+    isNaN(f) { return f.isNaN(); },
+    isFinite(f) { return f.isFinite(); },
+    equals(f, g) { return f.equals(q); },
+
+    approximatelyEquals(f, g, epsilon) {
+        return f.sub(g).abs().lessThan(epsilon)
+    },
+
+    compare(f, g) { return f.cmp(g) },
+    lt(f, g) { return f.lt(g) },
+    lte(f, g) { return f.lte(g) <= 0 },
+    gte(f, g) { return f.gte(g) >= 0 },
+    gt(f, g) { return f.gt(g) > 0 }
+  }
+
+  P[Symbol.for('arithmetics')] = BigNumberArithmetics
+
+
   // Decimal prototype methods
 
 
