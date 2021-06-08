@@ -1,7 +1,7 @@
 {
   "name": "@m93a/decimal.js",
   "description": "An arbitrary-precision Decimal type for JavaScript.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "arbitrary",
     "precision",
