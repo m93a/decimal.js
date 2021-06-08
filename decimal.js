@@ -188,6 +188,14 @@
     gt(f, g) { return f.gt(g) > 0 }
   }
 
+  function digits (value) {
+  return value
+    .toExponential()
+    .replace(/e.*$/, '') // remove exponential notation
+    .replace(/^0\.?0*|\./, '') // remove decimal point and leading zeros
+    .length
+}
+
   P[Symbol.for('arithmetics')] = BigNumberArithmetics
 
 
